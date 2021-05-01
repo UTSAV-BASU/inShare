@@ -1,9 +1,15 @@
 const express = require('express');
 const path = require('path');
-
+const cors = require('cors')
 const app = express();
 const connectDB = require('./config/db');
 connectDB();
+//cors
+const corsOptions = {
+    origin: process.env.ALLOWED_CLIENTS.split(',')
+    //['http://localhost:3000','http://localhost:5000']
+}
+app.use(cors(corsOptions));
 // to instruct the server that that our public data files like css files are kept in public folder
 app.use(express.static('public'))
 app.use(express.json());
